@@ -1,0 +1,40 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #fff; margin: 0; padding: 0 8px 24px; }
+.content { padding-top: 0; }
+.content h2 { font-size: 22px; font-weight: normal; color: #333; margin: 0 0 24px 0; }
+.form-row { display: flex; align-items: flex-start; margin-bottom: 20px; }
+.form-label { width: 200px; font-size: 14px; color: #333; padding-top: 8px; }
+.select-input { padding: 8px 12px; border: 1px solid #999; border-radius: 4px; min-width: 280px; font-size: 13px; font-weight: normal; color: #666; background: #fff; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+.text-input { padding: 8px 12px; border: 1px solid #999; border-radius: 4px; min-width: 280px; font-size: 13px; }
+.textarea-input { padding: 8px 12px; border: 1px solid #999; border-radius: 4px; min-width: 280px; min-height: 120px; font-size: 13px; font-family: inherit; resize: vertical; }
+.separator-line { height: 3px; background: #000; margin: 20px 0; border: none; }
+.footer-line { height: 1px; background: #e0e0e0; margin-top: 24px; }
+.form-row-workflow-and-common { display: flex; align-items: flex-start; gap: 32px; flex-wrap: wrap; }
+.workflow-name-block { flex: 1 1 58%; min-width: 340px; }
+.workflow-input-wrap, .workflow-textarea-wrap { flex: 1; min-width: 320px; }
+.workflow-name-block .text-input { width: 100%; }
+.workflow-name-block .textarea-input { min-height: 220px; width: 100%; }
+.common-steps-block { flex: 0 1 38%; min-width: 260px; max-width: 380px; }
+.common-steps-header { font-size: 14px; color: #333; margin-bottom: 8px; }
+.common-steps-box { border: 1px solid #000; border-radius: 4px; background: #fff; padding: 12px; min-height: 80px; max-height: 320px; overflow-y: auto; }
+.common-steps-list { display: flex; flex-direction: column; }
+.common-steps-list .common-step-item { color: #2d5a87; text-decoration: underline; font-style: italic; cursor: pointer; font-size: 13px; padding: 8px 0; border-bottom: 1px solid #e0e0e0; }
+.common-steps-list .common-step-item:last-child { border-bottom: none; }
+.common-steps-list .common-step-item:hover { color: #1a3a5c; }
+.common-steps-list .common-steps-empty { color: #666; font-size: 13px; font-style: italic; }
+.common-steps-list .common-steps-loading { color: #666; font-size: 13px; }
+.reuse-workflow-msg { font-size: 13px; color: #333; margin-top: 12px; }
+.reuse-workflow-msg a { color: #2d5a87; text-decoration: underline; cursor: pointer; font-weight: 600; }
+.reuse-workflow-msg a:hover { color: #1a3a5c; }
+.workflow-actions-row { margin-bottom: 0; }
+.workflow-actions { margin-top: 12px; display: flex; gap: 12px; align-items: center; }
+.workflow-actions .cs-btn { padding: 10px 24px; background: linear-gradient(135deg, #2d5a87 0%, #1a3a5c 100%); color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; }
+.workflow-actions .cs-btn:hover { background: linear-gradient(135deg, #1a3a5c 0%, #0d1f2d 100%); }
+.workflow-actions .cs-btn:disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.workflow-textarea-wrap { position: relative; }
+.workflow-input-wrap .text-input, .workflow-textarea-wrap .textarea-input { width: 100%; }
+#bddCucumberFields { display: none; }
+/* 75% of workflow name input width (row minus 200px label) */
+.bdd-field-wrap { width: calc((100% - 200px) * 0.75); max-width: calc((100% - 200px) * 0.75); }
+.bdd-field-wrap .text-input { width: 100%; }
+.workflow-name-error { color: red; font-size: 13px; display: block; margin-top: 4px; }

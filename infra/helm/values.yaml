@@ -1,0 +1,116 @@
+first-app:
+  applicationName: chewy-genai-automation
+  ownerEmailPrefix: "DL-IT_Payments_Engineering"
+  costCenter: opta
+  dataClassification: pci
+
+  node:
+    family: pci
+    supportedArchitectures:
+      - amd64
+    spotAllowed: true
+
+
+  scaling:
+    minPods: 1
+    maxPods: 10
+    scaleBy:
+      internalRps:
+        enabled: true
+        averageValuePerPod: 10
+      externalRps:
+        enabled: false
+        averageValuePerPod: 5
+      cpu:
+        enabled: true
+        averagePercentagePerPod: 60
+      memory:
+        enabled: false
+        averagePercentagePerPod: 60
+
+  service:
+    enabled: true
+    targetPort: 8080
+    protocol: TCP
+
+  ## By default the following routes are given:
+  ##   - /eks/ns/{namespace}/{applicationName} is given.
+  ##   - /eks/app/{applicationName} is given (points to the app in its primary namespace).
+  ingress:
+    enabled: true
+    additionalRoutes: [] 
+  externalSecrets:
+    aws-session-token:
+      from: secrets-manager
+      externalName: /chewy/genai/automation
+      property: AWS_SESSION_TOKEN
+    aws-secret-access-key:
+      from: secrets-manager
+      externalName: /chewy/genai/automation
+      property: AWS_SECRET_ACCESS_KEY
+    aws-access-key-id:
+      from: secrets-manager
+      externalName: /chewy/genai/automation
+      property: AWS_ACCESS_KEY_ID
+    open-api-key:
+      from: secrets-manager
+      externalName: /chewy/genai/automation
+      property: OPENAI_API_KEY
+    token:
+      from: secrets-manager
+      externalName: /chewy/genai/automation
+      property: TOKEN
+    # S3 recordings only (genai-chewy-automation/Recordings); does not replace AWS_* for Bedrock/Secrets Manager
+    s3-recordings-aws-session-token:
+      from: secrets-manager
+      externalName: /chewy/genai/automation
+      property: S3_RECORDINGS_AWS_SESSION_TOKEN
+    s3-recordings-aws-secret-access-key:
+      from: secrets-manager
+      externalName: /chewy/genai/automation
+      property: S3_RECORDINGS_AWS_SECRET_ACCESS_KEY
+    s3-recordings-aws-access-key-id:
+      from: secrets-manager
+      externalName: /chewy/genai/automation
+      property: S3_RECORDINGS_AWS_ACCESS_KEY_ID
+  pod:
+    iamRoleArn: 'arn:aws:iam::{{ include "chewy-application.computedValues.account" $ }}:role/{{ include "chewy-application.computedValues.environment" $ }}-{{ include "chewy-application.computedValues.shortRegion" $ }}-payments-c-cnp-service-eks-role'
+    containers:
+        chewy-genai-automation:
+          image:
+            repository: opta/chewy-genai-automation
+            ## global.version is what apt-eks-jenkins-utils sets from the pipeline
+            version: "{{ .Values.global.version }}"
+          ## Define the resources the container can have. Limits must be greater than requests
+          resources:
+            limits:
+              cpu: "2"
+              memory: 2G
+            requests:
+              cpu: "2"
+              memory: 1G
+          env:
+            ENVIRONMENT:
+              value: '{{ include "chewy-application.computedValues.environment" . }}'
+            AWS_REGION:
+              value: '{{ .Values.global.region }}'
+            S3_RECORDINGS_AWS_REGION:
+              value: '{{ .Values.global.region }}'
+            SHORT_REGION:
+              value: '{{ .Values.global.short_region }}'
+            AWS_SESSION_TOKEN:
+              externalSecretName: aws-session-token
+            AWS_SECRET_ACCESS_KEY:
+              externalSecretName: aws-secret-access-key
+            AWS_ACCESS_KEY_ID:
+              externalSecretName: aws-access-key-id
+            OPENAI_API_KEY:
+              externalSecretName: open-api-key
+            TOKEN:
+              externalSecretName: token
+            S3_RECORDINGS_AWS_ACCESS_KEY_ID:
+              externalSecretName: s3-recordings-aws-access-key-id
+            S3_RECORDINGS_AWS_SECRET_ACCESS_KEY:
+              externalSecretName: s3-recordings-aws-secret-access-key
+            S3_RECORDINGS_AWS_SESSION_TOKEN:
+              externalSecretName: s3-recordings-aws-session-token

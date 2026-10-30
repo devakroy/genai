@@ -1,0 +1,116 @@
+[
+  {
+    "domain": "Payment",
+    "github-repo": "payments-ui-test-suite",
+    "path": "src/tests",
+    "jenkins-project-name": "test-genie_execution",
+    "github_access_token": "GITHUB_PAT",
+    "jenkins_api_token": "JENKINS_API_TOKEN",
+    "default_branch": "main",
+    "applicationBaseURL": ["www-stg.chewy.net"],
+    "slack_channel_emails": [
+      "service-automation-po-aaaamgo4wvrgif5sxmrvk5ksdu@chewy.org.slack.com"
+    ],
+    "email_recipients": [
+      "kbalakrish@chewy.com"
+    ]
+  },
+  {
+    "domain": "Galileo",
+    "github-repo": "payments-ui-test-suite",
+    "path": "src/tests",
+    "jenkins-project-name": "test-genie_execution",
+    "github_access_token": "GITHUB_PAT",
+    "jenkins_username": "JENKINS_USERNAME",
+    "jenkins_api_token": "JENKINS_API_TOKEN",
+    "default_branch": "main",
+    "applicationBaseURL": ["www-stg.chewy.net"],
+    "slack_channel_emails": [
+      "service-automation-po-aaaamgo4wvrgif5sxmrvk5ksdu@chewy.org.slack.com"
+    ],
+    "email_recipients": [
+      "kbalakrish@chewy.com"
+    ]
+  },
+  {
+    "domain": "pic",
+    "github-repo": "pic-ui-test-suite",
+    "path": "src/tests",
+    "jenkins-project-name": "test-genie_execution",
+    "github_access_token": "GITHUB_PAT",
+    "jenkins_username": "JENKINS_USERNAME",
+    "jenkins_api_token": "JENKINS_API_TOKEN",
+    "default_branch": "main",
+    "applicationBaseURL": ["portal.master.rhapsody.vet","www-stg.chewy.net"],
+    "slack_channel_emails": [
+      "pic-testgenie-automat-aaaasetc4vdkjmx3i54qwqypm4@chewy.org.slack.com"
+    ],
+    "email_recipients": [
+      "okit@chewy.com"
+    ]
+  },
+  {
+    "domain": "omni-channel",
+    "github-repo": "Omnichannel-UI-Test-Suite",
+    "path": "src/tests",
+    "jenkins-project-name": "build-Omnichannel-UI-Test-Suite",
+    "github_access_token": "GITHUB_PAT",
+    "jenkins_username": "JENKINS_USERNAME",
+    "jenkins_api_token": "JENKINS_API_TOKEN",
+    "default_branch": "main",
+    "applicationBaseURL": ["www-stg.chewy.net","portal.master.rhapsody.vet"],
+    "slack_channel_emails": [
+      "service-automation-po-aaaamgo4wvrgif5sxmrvk5ksdu@chewy.org.slack.com"
+    ],
+    "email_recipients": [
+      "mjain1@chewy.com"
+    ]
+  },
+  {
+    "domain": "bnpl",
+    "github-repo": "payments-ui-test-suite",
+    "path": "src/tests",
+    "jenkins-project-name": "test-genie_execution",
+    "github_access_token": "GITHUB_PAT",
+    "jenkins_username": "JENKINS_USERNAME",
+    "jenkins_api_token": "JENKINS_API_TOKEN",
+    "default_branch": "main",
+    "applicationBaseURL": ["www-stg.chewy.net"]
+  },
+  {
+    "domain": "Example-Module",
+    "github-repo": "payments-ui-automation",
+    "path": "tree/master/tests",
+    "jenkins-project-name": "Example-Module_execution",
+    "github_access_token": "GITHUB_PAT",
+    "jenkins_username": "JENKINS_USERNAME",
+    "jenkins_api_token": "JENKINS_API_TOKEN",
+    "default_branch": "master",
+    "applicationBaseURL": ["portal.master.rhapsody.vet", "www-stg.chewy.net", "cs-platform.csbb.stg.chewy.com"],
+    "slack_channel_emails": [
+      "service-automation-po-aaaamgo4wvrgif5sxmrvk5ksdu@chewy.org.slack.com"
+    ],
+    "email_recipients": [
+      "kbalakrish@chewy.com"
+    ]
+  },
+  {
+    "domain": "cvc-ctx",
+    "github-repo": "pbt-ui-tests",
+    "path": "testgenie",
+    "jenkins-project-name": "test-genie_execution",
+    "github_access_token": "GITHUB_PAT",
+    "jenkins_username": "JENKINS_USERNAME",
+    "jenkins_api_token": "JENKINS_API_TOKEN",
+    "default_branch": "master",
+    "applicationBaseURL": ["portal.master.rhapsody.vet","www-stg.chewy.net"],
+    "slack_channel_emails": [
+      "service-automation-po-aaaamgo4wvrgif5sxmrvk5ksdu@chewy.org.slack.com"
+    ],
+    "email_recipients": [
+      "kbalakrish@chewy.com"
+    ]
+  }
+]
+
+

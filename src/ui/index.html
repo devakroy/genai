@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Genie - AI Powered</title>
+    <link rel="stylesheet" href="/TestGenie/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-title">Test Genie <span>AI Powered</span></div>
+        <img src="https://www.chewy.com/app/static/images/chewy-logo-dark-bg.svg" alt="Chewy" class="header-logo" onerror="this.style.display='none'">
+    </div>
+    
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <button class="nav-tab active">Web-Ui<br>Automation</button>
+        <button class="nav-tab">Analytics</button>
+        <button class="nav-tab">Help</button>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-item active">Create Steps</div>
+            <div class="sidebar-item">Generate Scripts</div>
+            <div class="sidebar-item disabled" aria-disabled="true" style="display: none;">Execution Logs</div>
+            <div class="sidebar-item">Execution Status</div>
+            <div class="sidebar-item">Common Steps</div>
+            <div class="sidebar-item">Auto-Heal</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <!-- Create Steps Section (visible by default): loads create-steps.html so all UI/JS live there -->
+            <div id="createStepsSection">
+                <iframe src="/TestGenie/static/create-steps.html" title="Create Steps" style="width:100%; min-height:80vh; border:none;"></iframe>
+            </div>
+
+            <!-- Generate Scripts Section (hidden by default) -->
+            <div id="generateScriptsSection" style="display: none;">
+                <h2>Please Provide Your Inputs:</h2>
+                
+                <div class="form-row">
+                    <div class="form-label">Project Domain</div>
+                    <select class="select-input" id="selectDomain" required>
+                        <option value="" selected disabled>-- Select Domain --</option>
+                        <!-- Options will be populated dynamically from onboardingConfiguration.json via API -->
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label">Upload Feature File</div>
+                    <div class="file-input-wrapper">
+                        <div class="file-display" id="featureFileName">No file uploaded</div>
+                        <button type="button" class="browse-btn" id="browseFeatureBtn">Browse</button>
+                        <span id="featureFileValidationError" class="feature-file-validation-error-beside-browse" hidden></span>
+                        <input type="file" id="featureFile" accept=".feature" style="display:none">
+                    </div>
+                </div>
+            
+            <div class="form-row">
+                <div class="form-label">Include API Calls</div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="includeApiSteps">
+                </div>
+            </div>
+            
+            <!-- JSON Upload Section (hidden by default) -->
+            <div class="json-upload-section" id="jsonUploadSection">
+                <div class="form-row">
+                    <div class="form-label">Upload API JSON Files</div>
+                    <div class="json-upload-row">
+                        <div class="json-file-display" id="jsonFileDisplay">No file selected</div>
+                        <label class="add-json-btn" title="Add JSON file">
+                            +
+                            <input type="file" id="jsonFileInput" accept=".json" style="display:none" multiple>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label"></div>
+                    <div class="uploaded-files" id="uploadedFilesList"></div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-label">Execution Engine</div>
+                <select class="select-input" id="dryRunStrategy">
+                    <option value="Javascript">Javascript</option>
+                    <option value="MCP" selected>MCP</option>
+                </select>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-label">Generate BDD Scripts</div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="bddFormat">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-label">Show script design preview</div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="showPreview">
+                </div>
+            </div>
+            
+            
+            <div class="form-row">
+                <div class="form-label">Push to GitHub</div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="pushToGithub">
+                </div>
+            </div>
+            
+            <!-- Branch Name Section (hidden by default, visible when Push to GitHub is checked) -->
+            <div class="branch-section" id="branchSection">
+                <div class="form-row">
+                    <div class="form-label"></div>
+                    <input type="text" class="text-input" id="branchName" placeholder="Branch name(no 'feature/' prefix) (optional)">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-label"></div>
+                <button class="generate-btn" id="generateBtn" type="button" disabled>Generate</button>
+            </div>
+            
+            <div class="footer-line"></div>
+            
+            <!-- Result Section -->
+            <div class="result-section" id="resultSection">
+                <h4 id="resultTitle">Result</h4>
+                <div id="resultContent"></div>
+            </div>
+            </div>
+
+            <!-- Common Steps Section (hidden by default) -->
+            <div id="commonStepsSection" style="display: none;">
+                <h2>Common Steps</h2>
+                <div id="csBanner" class="cs-banner success"></div>
+                <div class="cs-tabs">
+                    <button class="cs-tab active" data-cs-tab="add">Add / Preview</button>
+                    <button class="cs-tab" data-cs-tab="view">View / Search</button>
+                </div>
+
+                <!-- Add / Preview Panel -->
+                <div class="cs-panel visible" data-cs-panel="add">
+                    <div class="cs-form-grid">
+                        <div class="cs-card">
+                            <div style="display:grid; gap:12px;">
+                                <div>
+                                    <label>Key line</label>
+                                    <textarea id="csKeyLine" class="cs-textarea" placeholder='e.g., user navigate to checkout page'></textarea>
+                                </div>
+                                <div>
+                                    <label>Common steps (one per line)</label>
+                                    <textarea id="csSteps" class="cs-textarea" placeholder='Then user clicks on "Buy once" Radio button&#10;Then user clicks on "Add to Cart"&#10;Then user clicks on "Proceed to Checkout"'></textarea>
+                                </div>
+                                <div>
+                                    <label>Domain</label>
+                                    <select id="csDomain" class="cs-select">
+                                        <option value="">-- Select --</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>&nbsp;</label><br/>
+                                    <label class="cs-inline"><input type="checkbox" id="csHasApi" /> Has API Steps</label>
+                                </div>
+                                <div>
+                                    <label>Default parameters (JSON, optional)</label>
+                                    <textarea id="csDefaultJson" class="cs-textarea" placeholder='{"email": "ss@ss.com"}'></textarea>
+                                    <div class="cs-help">Leave empty to auto-detect placeholders like {var} from steps.</div>
+                                </div>
+                                <div>
+                                    <label>API requests (JSON array, optional)</label>
+                                    <textarea id="csApiRequests" class="cs-textarea" placeholder='[{"action":"invoke","configFile":"newuser_auth_config.json"}]'></textarea>
+                                </div>
+                                <div>
+                                    <label>Upload API step JSON file(s)</label><br/>
+                                    <input type="file" id="csApiFiles" accept=".json" multiple />
+                                    <div class="cs-help">Each file may be a JSON array or {"steps":[ ... ]} object.</div>
+                                </div>
+                                <div class="cs-actions">
+                                    <button id="csPreviewBtn" class="cs-btn secondary">Preview</button>
+                                    <button id="csSaveBtn" class="cs-btn primary">Save</button>
+                                    <button id="csResetBtn" class="cs-btn secondary">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View / Search Panel -->
+                <div class="cs-panel" data-cs-panel="view">
+                    <div class="cs-card" style="margin-bottom:12px;">
+                        <div class="cs-inline" style="gap:12px; flex-wrap: wrap;">
+                            <div>
+                                <label>Domain</label><br/>
+                                <select id="csSearchDomain" class="cs-select" style="min-width:220px;">
+                                    <option value="">-- Select --</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Key line contains</label><br/>
+                                <input id="csSearchKey" class="cs-input" type="text" placeholder="search terms" style="min-width:260px;"/>
+                            </div>
+                            <div>
+                                <label>Limit</label><br/>
+                                <input id="csSearchLimit" class="cs-input" type="number" value="50" min="1" max="200" style="width:120px;"/>
+                            </div>
+                            <div style="align-self:flex-end;">
+                                <button id="csSearchBtn" class="cs-btn primary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cs-card" style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+                        <div id="csSelectedCount" style="color:#333;">0 selected</div>
+                        <div class="cs-inline">
+                            <button id="csViewRefreshBtn" class="cs-btn secondary">Refresh</button>
+                            <button id="csViewDeleteBtn" class="cs-btn" style="background:#dc3545; color:#fff;" disabled>Delete selected</button>
+                        </div>
+                    </div>
+                    <div class="cs-card">
+                        <div id="csResultsArea">
+                            <div style="color:#666;">Use the filters above and click Search to view saved Common Steps.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+        <!-- Execution Logs Section (hidden by default) -->
+        <div id="executionLogsSection" style="display: none;">
+            <h2>Please Provide Your Inputs:</h2>
+            
+            <div class="form-row">
+                <div class="form-label" style="width: 280px;">Download Automation Scripts</div>
+                <div class="file-input-wrapper">
+                    <input type="text" class="text-input" id="automationFileName" placeholder="Enter filename" style="min-width: 280px;">
+                    <button type="button" class="browse-btn" id="downloadAutomationBtn" style="background: #2d5a87;">Download</button>
+                </div>
+            </div>
+            <div id="automationError" style="margin-left: 280px; margin-top: 5px; font-size: 12px; color: red; display: none;"></div>
+            
+            <div class="form-row" style="margin-top: 30px;">
+                <div class="form-label" style="width: 280px;">Download Test Execution Recordings</div>
+                <div class="file-input-wrapper">
+                    <input type="text" class="text-input" id="recordingsFileName" placeholder="Enter filename" style="min-width: 280px;">
+                    <button type="button" class="browse-btn" id="downloadRecordingsBtn" style="background: #2d5a87;">Download</button>
+                </div>
+            </div>
+            <div id="recordingsError" style="margin-left: 280px; margin-top: 5px; font-size: 12px; color: red; display: none;"></div>
+        </div>
+
+        <!-- Analytics Section (hidden by default) -->
+        <div id="analyticsSection" class="analytics-container">
+            <div class="analytics-header">
+                <h2>📊 Test Automation Analytics Dashboard</h2>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <label style="font-size: 14px; color: #333;">From:</label>
+                    <input type="date" id="startDateFilter" class="text-input" style="min-width: 150px; padding: 6px 10px;">
+                    <label style="font-size: 14px; color: #333;">To:</label>
+                    <input type="date" id="endDateFilter" class="text-input" style="min-width: 150px; padding: 6px 10px;">
+                    <button class="refresh-btn" onclick="applyDateFilter()">📊 Apply Filter</button>
+                    <button class="refresh-btn" onclick="resetDateFilter()" style="background: #6c757d;">🔄 Reset</button>
+                </div>
+            </div>
+            
+            <div id="analyticsLoading" class="loading-overlay">
+                <div class="loading"></div>
+                <p>Loading analytics data...</p>
+            </div>
+            
+            <div id="analyticsContent" style="display: none;">
+                <!-- Stats Cards -->
+                <div class="analytics-stats" id="statsCards"></div>
+                
+                <!-- Charts Grid -->
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>📊 Success Rate Distribution</h3>
+                        <div class="chart-canvas">
+                            <canvas id="successRateChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>⚡ MCP vs Javascript Performance</h3>
+                        <div class="chart-canvas">
+                            <canvas id="crawlerComparisonChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>📈 Execution Trends (Last 30 Days)</h3>
+                        <div class="chart-canvas">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>📊 Module Performance</h3>
+                        <div class="chart-canvas">
+                            <canvas id="moduleChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>⏱️ Average Execution Time by Module</h3>
+                        <div class="chart-canvas">
+                            <canvas id="executionTimeChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>🎯 GitHub Push Statistics</h3>
+                        <div class="chart-canvas">
+                            <canvas id="githubPushChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Table -->
+                <div class="data-table-container">
+                    <h3>📋 Recent Executions (Last 50)</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table" id="analyticsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Feature</th>
+                                    <th>Module</th>
+                                    <th>Scenarios</th>
+                                    <th>Time (s)</th>
+                                    <th>Date</th>
+                                    <th>Success</th>
+                                    <th>Crawler</th>
+                                    <th>GitHub</th>
+                                </tr>
+                            </thead>
+                            <tbody id="analyticsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Section (hidden by default) -->
+        <div id="helpSection" style="display: none;">
+            <iframe src="/TestGenie/static/help.html" title="Help & Onboarding" style="width:100%; min-height:80vh; border:none;"></iframe>
+        </div>
+
+        <!-- Execution Status Section (hidden by default) -->
+         <div id="executionStatusSection" style="display: none;">
+                 <h2>Execution Status</h2>
+
+                 <div class="es-header">
+                     <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; width: 100%;">
+                         <div style="display: flex; align-items: center; gap: 8px;">
+                             <label style="font-size: 14px; color: #333; font-weight: 500;">Date:</label>
+                             <input type="date" id="esDateInput" class="es-date-input" />
+                         </div>
+                         <div style="display: flex; align-items: center; gap: 8px;">
+                             <label style="font-size: 14px; color: #333; font-weight: 500;">Module:</label>
+                             <select id="esModuleInput" class="select-input" style="min-width: 200px; padding: 8px 12px;">
+                                 <option value="">-- Select Module --</option>
+                             </select>
+                         </div>
+                         <div style="display: flex; align-items: center; gap: 8px;">
+                             <label style="font-size: 14px; color: #333; font-weight: 500;">RunId:</label>
+                             <input type="text" id="esRunIdInput" class="text-input" placeholder="Enter RunId" style="min-width: 180px; padding: 8px 12px;" />
+                         </div>
+                         <button id="esSubmitBtn" class="es-submit-btn">Submit</button>
+                     </div>
+                 </div>
+
+                <!-- In-Progress Executions -->
+                <div class="es-section">
+                    <div class="es-section-title">In-Progress Execution:</div>
+                    <div id="esInProgressContainer">
+                        <div class="es-no-data">Loading...</div>
+                    </div>
+                </div>
+
+                <!-- Completed Executions -->
+                <div class="es-section">
+                    <div class="es-section-title">Completed Execution:</div>
+                    <div id="esCompletedContainer">
+                        <div class="es-no-data">Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Auto-Heal Section -->
+            <div id="autoHealSection" style="display: none;">
+                <h2>Auto-Heal Status</h2>
+
+                <div class="es-header">
+                    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; width: 100%;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <label style="font-size: 14px; color: #333; font-weight: 500;">Module:</label>
+                            <select id="ahModuleSelect" class="select-input" style="min-width: 200px; padding: 8px 12px;">
+                                <option value="">-- Select Module --</option>
+                            </select>
+                        </div>
+                        <button id="ahSearchBtn" class="es-submit-btn" onclick="fetchAutoHealData()">Search</button>
+                    </div>
+                </div>
+
+                <div id="ahResultsContainer">
+                    <div style="margin-bottom: 32px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div style="text-align: center; padding: 40px; color: #666; font-style: italic;">Select filters and click "Search" to view auto-heal data</div>
+                    </div>
+                </div>
+            </div>
+         </div>
+     </div>
+
+     <!-- Execution Status Modal for Step Details -->
+    <div id="esModal" class="es-modal-overlay">
+        <div class="es-modal">
+            <div class="es-modal-header">
+                <h4 class="es-modal-title">Step Details:</h4>
+            </div>
+            <div class="es-modal-body" id="esModalBody">
+                <ul id="esModalStepsList"></ul>
+            </div>
+            <div class="es-modal-footer">
+                <button id="esModalAddSelectedBtn" class="es-modal-ok-btn" style="display:none; margin-right:8px;">Add Selected Steps</button>
+                <button id="esModalOkBtn" class="es-modal-ok-btn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Details Modal -->
+    <div id="esErrorDetailsModal" class="es-modal-overlay">
+        <div class="es-modal">
+            <div class="es-modal-header">
+                <h4 class="es-error-modal-title">Failure Details</h4>
+            </div>
+            <div class="es-modal-body">
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 13px; font-weight: 600; color: #333; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Error Message</div>
+                    <div class="es-error-message-content" style="font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.5; overflow-y: auto; white-space: pre-wrap; word-wrap: break-word; background: #fff; padding: 10px; border-radius: 4px; border: 1px solid #e0e0e0; color: #333;"></div>
+                </div>
+            </div>
+            <div class="es-modal-footer">
+                <button class="es-modal-ok-btn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full-screen Preview Overlay -->
+    <div id="csPreviewOverlay" class="cs-overlay" style="display:none;">
+        <div class="cs-modal">
+            <div class="cs-modal-header">
+                <div class="cs-modal-title">Preview</div>
+                <div class="cs-inline">
+                    <button id="csOverlayClose" class="cs-btn secondary">Close</button>
+                </div>
+            </div>
+            <div id="csOverlayBody" class="cs-overlay-body"></div>
+        </div>
+    </div>
+
+    <!-- Feature file validation: full error message -->
+    <div id="featureFileValidationModal" class="es-modal-overlay">
+        <div class="es-modal" style="max-width: 560px;">
+            <div class="es-modal-header">
+                <h4 class="es-modal-title">Feature file validation</h4>
+            </div>
+            <div class="es-modal-body">
+                <pre id="featureFileValidationModalBody" style="margin: 0; font-family: inherit; font-size: 13px; line-height: 1.45; white-space: pre-wrap; word-break: break-word; max-height: 60vh; overflow-y: auto; color: #333;"></pre>
+            </div>
+            <div class="es-modal-footer">
+                <button type="button" id="featureFileValidationModalCloseBtn" class="es-modal-ok-btn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Design Preview Modal -->
+    <div id="scriptPreviewModal" class="es-modal-overlay">
+        <div class="es-modal script-preview-modal-inner" style="max-width: 1000px;">
+            <div class="es-modal-header">
+                <h4 class="es-modal-title">Script Design Preview</h4>
+            </div>
+            <div class="es-modal-body" id="scriptPreviewBody">
+                <table class="data-table" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="background: #1a3a5c; color: white; padding: 12px; text-align: left;">Step Number</th>
+                            <th style="background: #1a3a5c; color: white; padding: 12px; text-align: left;">Full Step</th>
+                            <th style="background: #1a3a5c; color: white; padding: 12px; text-align: center;">Action</th>
+                            <th style="background: #1a3a5c; color: white; padding: 12px; text-align: center;">Confidence</th>
+                            <th id="scriptPreviewPlusMinusHeader" style="background: #1a3a5c; color: white; padding: 12px; text-align: center; width: 60px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="scriptPreviewTableBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="es-modal-footer" id="scriptPreviewModalFooter">
+                <button id="scriptPreviewReGenerateBtn" class="es-modal-ok-btn" style="background: #17a2b8; margin-right: 10px;">Re-generate</button>
+                <button id="scriptPreviewSubmitBtn" class="es-modal-ok-btn" style="background: #28a745; margin-right: 10px;">Submit</button>
+                <button id="scriptPreviewCloseBtn" class="es-modal-ok-btn">Close</button>
+            </div>
+            <div id="scriptPreviewLoadingOverlay" class="script-preview-loading-overlay" style="display: none;">
+                <span class="script-preview-loading-spinner" aria-hidden="true"></span>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+    <script src="execution_status_functions.js"></script>
+</body>
+</html>

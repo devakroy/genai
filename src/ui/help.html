@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestGenie Help & Onboarding Guide</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            color: #333; 
+            line-height: 1.6; 
+            background: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        * { 
+            box-sizing: border-box; 
+        }
+        
+        h1 { 
+            color: #1a3a5c; 
+            font-size: 28px;
+            border-bottom: 3px solid linear-gradient(to right, #1a3a5c, #2d5a87);
+            padding-bottom: 15px; 
+            margin-bottom: 25px;
+            margin-top: 0;
+            font-weight: normal;
+        }
+        
+        h2 { 
+            color: #1a3a5c; 
+            font-size: 20px;
+            margin-top: 28px; 
+            margin-bottom: 16px; 
+            padding-left: 12px;
+            padding-bottom: 8px;
+            border-left: 5px solid #2d5a87;
+            font-weight: 500;
+        }
+        
+        h3 { 
+            color: #2d5a87; 
+            margin-top: 18px; 
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        p { 
+            margin-bottom: 14px; 
+            color: #555; 
+            font-size: 14px;
+        }
+        
+        ol, ul { 
+            margin-left: 30px; 
+            margin-bottom: 16px; 
+        }
+        
+        li { 
+            margin-bottom: 10px; 
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .toc { 
+            background: linear-gradient(to bottom, #fafbfc, #f0f5f9); 
+            border: 1px solid #d0dce6; 
+            border-left: 5px solid #2d5a87;
+            padding: 18px; 
+            border-radius: 6px; 
+            margin-bottom: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .toc h3 { 
+            margin-top: 0;
+            color: #1a3a5c;
+            margin-bottom: 12px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+            margin-left: 0;
+        }
+
+        .toc ul li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .toc ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2d5a87;
+            font-weight: bold;
+        }
+        
+        .toc a { 
+            color: #2d5a87; 
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .toc a:hover { 
+            color: #1a3a5c;
+            text-decoration: underline;
+        }
+        
+        .info-box, .warning-box, .success-box { 
+            padding: 14px 16px; 
+            margin: 18px 0; 
+            border-radius: 6px;
+            border-left: 5px solid;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .info-box { 
+            background-color: #e8f4f8; 
+            border-left-color: #2196f3;
+            color: #0d47a1;
+        }
+        
+        .warning-box { 
+            background-color: #fff9e6; 
+            border-left-color: #ffc107;
+            color: #6c5400;
+        }
+        
+        .success-box { 
+            background-color: #e8f5e9; 
+            border-left-color: #4caf50;
+            color: #1b5e20;
+        }
+        
+        code { 
+            background-color: #f5f5f5; 
+            padding: 3px 6px; 
+            border-radius: 4px; 
+            font-family: 'Courier New', Courier, monospace; 
+            color: #c71c1c;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .code-block { 
+            background-color: #f8f9fa; 
+            padding: 14px; 
+            border-radius: 6px; 
+            border-left: 4px solid #2d5a87;
+            border: 1px solid #e0e0e0;
+            overflow-x: auto; 
+            margin: 14px 0; 
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #333;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            white-space: pre;
+            word-wrap: normal;
+        }
+
+        pre.code-block {
+            margin: 0;
+        }
+
+        a {
+            color: #2d5a87;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #1a3a5c;
+            text-decoration: underline;
+        }
+
+        strong {
+            color: #1a3a5c;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <h1>TestGenie Help & Onboarding Guide</h1>
+    
+        <div class="toc">
+        <h3>Quick Navigation</h3>
+        <ul>
+            <li><a href="#introduction">Introduction to TestGenie</a></li>
+            <li><a href="#getting-started">Getting Started</a></li>
+            <li><a href="#core-features">Core Features</a></li>
+            <li><a href="#create-steps">Create Steps</a></li>
+            <li><a href="#generate-scripts">Generate Scripts</a></li>
+            <li><a href="#feature-files">Creating Feature Files</a></li>
+            <li><a href="#bulk-form-table">Bulk form table (field / value)</a></li>
+            <li><a href="#example-table">Example Table (Data-Driven Tests)</a></li>
+            <li><a href="#common-steps">Common Steps</a></li>
+            <li><a href="#execution-status">Execution Status</a></li>
+            <li><a href="#auto-heal">Auto-Heal</a></li>
+            <li><a href="#api-integration">API Integration</a></li>
+            <li><a href="#cookie-extraction">Cookie Extraction</a></li>
+            <li><a href="#mock-api">Mock API Integration</a></li>
+            <li><a href="#local-testing">Local Testing</a></li>
+            <li><a href="#security">AWS Secrets Manager</a></li>
+            <li><a href="#troubleshooting">Troubleshooting & FAQ</a></li>
+        </ul>
+    </div>
+
+    <!-- Introduction -->
+    <div id="introduction">
+        <h2>Introduction to TestGenie</h2>
+        <p>TestGenie is an AI-powered web automation system that combines artificial intelligence, browser automation, and enterprise-grade infrastructure to deliver unprecedented efficiency and reliability in software testing.</p>
+        <p>This tool automatically generates Playwright-based TypeScript automation scripts from BDD feature files and seamlessly integrates them into your team's automation codebase repository on GitHub.</p>
+        <div class="success-box">
+            <strong>Key Achievement:</strong> 3-12 minute total processing time with 95%+ success rate
+        </div>
+    </div>
+
+    <!-- Getting Started -->
+    <div id="getting-started">
+        <h2>Getting Started</h2>
+        <p>Follow these steps to get started with TestGenie:</p>
+        <ol>
+            <li>Navigate to: <code>https://chewy-genai-automation.corp-ai-workloads.stg.aws.chewy.cloud/TestGenie</code></li>
+            <li>Sign in with your credentials</li>
+            <li>Select your project domain from the dropdown</li>
+            <li>Prepare your BDD feature file</li>
+            <li>Upload the feature file</li>
+            <li>Configure script generation options</li>
+            <li>Monitor execution status</li>
+            <li>Download generated scripts and video recordings</li>
+        </ol>
+    </div>
+
+    <!-- Core Features -->
+    <div id="core-features">
+        <h2>Core Features</h2>
+        <h3>AI-Powered Script Generation</h3>
+        <p>Automatically generates Playwright TypeScript automation scripts from BDD feature files with 95%+ accuracy.</p>
+        
+        <h3>Video Recording & Evidence Capture</h3>
+        <p>Full browser session recording for each test run, uploaded to AWS S3 for easy download and sharing.</p>
+        
+        <h3>GitHub Integration</h3>
+        <p>Automatically creates pull requests with generated scripts against your team's automation repository.</p>
+        
+        <h3>Jenkins Pipeline Integration</h3>
+        <p>Seamless integration with Jenkins for automated test execution and reporting.</p>
+        
+        <h3>Smart Caching</h3>
+        <p>Intelligent caching and reuse reduces processing time by 40%.</p>
+        
+    </div>
+
+    <!-- Create Steps -->
+    <div id="create-steps">
+        <h2>Create Steps</h2>
+        <p>The Create Steps feature allows you to manually create and refine test steps before script generation.</p>
+        <h3>How to Use:</h3>
+        <ol>
+            <li>Go to Create Steps in the left sidebar</li>
+            <li>Enter your test workflow description</li>
+            <li>Configure additional settings as needed</li>
+            <li>Click Generate to create the automation script</li>
+            <li>Preview and customize the generated steps</li>
+            <li>Submit to save your workflow</li>
+        </ol>
+        <div class="info-box">
+            <strong>Tip:</strong> Use clear, descriptive language when describing your workflow to get better AI-generated steps.
+        </div>
+    </div>
+
+    <!-- Generate Scripts -->
+    <div id="generate-scripts">
+        <h2>Generate Scripts</h2>
+        <p>Convert your BDD feature files into fully functional Playwright automation scripts.</p>
+        
+        <h3>Step-by-Step Process:</h3>
+        <ol>
+            <li>Select your Project Domain from the dropdown (required)</li>
+            <li>Click "Upload feature file" and select your .feature file in BDD Gherkin format</li>
+            <li>Configure options:
+                <ul>
+                    <li><strong>Include API Calls</strong> - Check if you have JSON files for API calls</li>
+                    <li><strong>Execution Engine</strong> - Choose MCP (recommended) or JavaScript crawler</li>
+                    <li><strong>Generate BDD Scripts</strong> - Unselected by default. Get Playwright scripts; select for BDD format</li>
+                    <li><strong>Show script design preview</strong> - See feature file and sample locators before execution</li>
+                </ul>
+            </li>
+            <li>Click "Generate" to start the process (typically 20 minutes)</li>
+            <li>You'll receive a Slack notification when complete</li>
+            <li>Download generated scripts and video of execution</li>
+        </ol>
+        
+        <div class="warning-box">
+            <strong>Important:</strong> Project Domain is mandatory for all script generation requests. Processing typically takes around 20 minutes depending on feature file length.
+        </div>
+    </div>
+
+    <!-- Feature Files -->
+    <div id="feature-files">
+        <h2>Creating Feature Files</h2>
+        <p>Feature files define your test scenarios in BDD (Behavior Driven Development) format.</p>
+        
+        <h3>Feature File Best Practices:</h3>
+        <ol>
+            <li>Start with a login step or account creation as needed</li>
+            <li>Write each step in clear, descriptive language</li>
+            <li>Always include verification steps at the end</li>
+            <li>Use consistent naming conventions</li>
+            <li>Reference URLs and element names precisely</li>
+        </ol>
+        
+        <h3>Example Feature File:</h3>
+        <pre class="code-block">@example-tag-123
+Feature: Checkout - PayPal Purchase Flow Without Saved PayPal Method (Buy Once)
+@scn-tag-123
+Scenario: Verify PayPal Checkout buttons are displayed
+    Given the user creates a new user account
+    Then user navigates to "https://www-stg.chewy.net/product/dp/12345"
+    Then user clicks on "Buy once" Radio button
+    Then user clicks on "Add to Cart"
+    Then user clicks on "Proceed to Checkout"
+    Then user enters "First and Last Name" as "Playwright Test"
+    Then user enters "Street Address" as "123 Main St"
+    Then user enters "City" as "Boston"
+    Then user select "State" as "MA"
+    Then user enters "02101" in the "ZIP Code" field
+    Then user enters "Phone Number" as "(617) 555-0123"
+    Then user clicks on "Ship to this address"
+    Then user clicks on radio button "PAYPAL"
+    Then the user verifies that "PayPal Checkout" button is displayed</pre>
+        
+        <div class="info-box">
+            <strong>Note:</strong> Feature files should be added to <code>src/tests/features</code> directory. See sample files <a href="https://github.com/Chewy-Inc/payments-ui-test-suite/tree/main/src/tests/features" target="_blank">here</a>.
+        </div>
+    </div>
+
+    <!-- Example Table -->
+    <div id="example-table">
+        <h2>Example Table (Data-Driven Tests)</h2>
+        <p>Run the same test scenario multiple times with different test data using Example Tables. This allows you to test the same feature with various inputs without writing duplicate scenarios.</p>
+        
+        <h3>What is an Example Table?</h3>
+        <p>An Example Table is a data table that contains test data for a <code>Scenario Outline</code>. Each row in the table represents a separate test run with different values.</p>
+        
+        <h3>When to Use Example Tables:</h3>
+        <ul>
+            <li>Testing the same workflow with multiple user accounts</li>
+            <li>Validating form inputs with different data combinations</li>
+            <li>Running the same purchase flow with different payment methods</li>
+            <li>Testing search functionality with different search terms</li>
+            <li>Verifying reports with different filter combinations</li>
+        </ul>
+        
+        <h3>Quick Example 1:</h3>
+        <pre class="code-block">Scenario Outline: User Registration
+  Given user navigates to registration page
+  When user enters "Email" as &lt;email&gt;
+  And user enters "Password" as &lt;password&gt;
+  Then user account is created successfully
+
+  Examples:
+    | email            | password    |
+    | user1@chewy.com  | Pass123!    |
+    | user2@chewy.com  | Pass456!    |
+    | user3@chewy.com  | Pass789!    |</pre>
+
+        <h3>Quick Example 2:</h3>
+        <pre class="code-block">Scenario Outline: Navigate to different pdp pages
+  When user navigates to "&lt;baseUrl&gt;"
+  Then user navigates to "&lt;firstProductUrl&gt;"
+  Then user clicks on the "Set Up Autoship" button
+  Then user navigates to "&lt;secondProductUrl&gt;"
+  Then user clicks on the "Set Up Autoship" button
+
+  Examples:
+    | baseUrl                   | firstProductUrl               | secondProductUrl                      |
+    | https://www-stg.chewy.net | https://www-stg.chewy.net/abc | https://www-stg.chewy.net/xyz        |</pre>
+
+        <h3>Quick Example 3:</h3>
+        <pre class="code-block">Scenario Outline: Navigate to pdp and add shipping data
+  When user navigates to "&lt;baseUrl&gt;"
+  Then user navigates to "&lt;productUrl&gt;"
+  Then user clicks on the "Set Up Autoship" button
+  Then the user clicks on "Proceed to Checkout"
+  Then user enters shipping details:
+      | field               | value      |
+      | First and Last Name | &lt;fullName&gt; |
+      | Street Address      | &lt;street&gt;   |
+      | City                | &lt;city&gt;     |
+      | State               | &lt;state&gt;    |
+      | ZIP Code            | &lt;zip&gt;      |
+      | Phone Number        | &lt;phone&gt;    |
+  When user clicks on "Ship to this Address"
+
+  Examples:
+    | baseUrl                   | productUrl                    | fullName        | street               | city   | state | zip   | phone            |
+    | https://www-stg.chewy.net | https://www-stg.chewy.net/abc | Playwright Test | 4 Northeastern Blvd | Nashua | NH    | 03079 | (077) 788-8777 |</pre>
+        
+        <h3>How to Write an Example Table:</h3>
+        <ol>
+            <li>Use <code>Scenario Outline:</code> instead of <code>Scenario:</code></li>
+            <li>In your steps, use angle brackets for placeholders: <code>&lt;email&gt;</code>, <code>&lt;password&gt;</code></li>
+            <li>Add <code>Examples:</code> section at the end</li>
+            <li>Create a table with:
+                <ul>
+                    <li>Header row: column names (must match your placeholders)</li>
+                    <li>Data rows: actual test values</li>
+                </ul>
+            </li>
+        </ol>
+        
+        <h3>Key Points:</h3>
+        <ul>
+            <li>Each row runs as a separate test automatically</li>
+            <li>Placeholder names (between angle brackets) must exactly match column headers</li>
+            <li>Use <code>|</code> (pipe) symbols to separate columns</li>
+            <li>The first row after <code>Examples:</code> must be headers</li>
+            <li>Each data row creates one complete test execution</li>
+        </ul>
+        
+        <h3>Best Practices:</h3>
+        <ul>
+            <li>Keep test data realistic and representative</li>
+            <li>Include edge cases (empty values, special characters, maximum length)</li>
+            <li>Use 3-5 examples per scenario for balance</li>
+            <li>Use descriptive column headers</li>
+            <li>For sensitive data, use AWS Secrets Manager placeholders: <code>&lt;awssecretmanager.credential_name&gt;</code></li>
+        </ul>
+        
+        <div class="success-box">
+            <strong>Pro Tip:</strong> The system automatically creates unique accounts per row when using Example Tables. If you have 5 rows, it will create 5 different user accounts and run 5 separate tests - all from a single Scenario Outline!
+        </div>
+    </div>
+
+    <!-- Common Steps -->
+    <div id="common-steps">
+        <h2>Common Steps</h2>
+        <p>Create reusable test step templates that you can use across multiple scenarios and projects.</p>
+        
+        <h3>Add/Preview Common Steps:</h3>
+        <ol>
+            <li>Go to Common Steps in the sidebar and click Add/Preview tab</li>
+            <li>Fill in the fields:
+                <ul>
+                    <li><strong>Key Line</strong> - unique identifier for the common step</li>
+                    <li><strong>Common Steps</strong> - list of test steps (one per line)</li>
+                    <li><strong>Domain</strong> - select the domain this applies to</li>
+                    <li><strong>Has API Steps</strong> - check if API calls are involved</li>
+                    <li><strong>Default Parameters</strong> - optional JSON for parameters</li>
+                </ul>
+            </li>
+            <li>Click Preview to see how steps will appear</li>
+            <li>Click Save to store in the database</li>
+        </ol>
+        
+        <h3>View/Search Common Steps:</h3>
+        <ol>
+            <li>Go to Common Steps → View/Search tab</li>
+            <li>Select a domain and enter search criteria</li>
+            <li>Click Search to find existing steps</li>
+            <li>Select and delete steps as needed</li>
+        </ol>
+    </div>
+
+    <!-- Execution Status -->
+    <div id="execution-status">
+        <h2>Execution Status</h2>
+        <p>Monitor the progress and results of your generated automation scripts.</p>
+        
+        <h3>What You Can See:</h3>
+        <ul>
+            <li>Current execution status (Running, Completed, Failed)</li>
+            <li>Test results and pass/fail statistics</li>
+            <li>Video recordings of test execution</li>
+            <li>Screenshot evidence captures</li>
+            <li>Detailed logs and error messages</li>
+            <li>Execution duration and timestamps</li>
+        </ul>
+    </div>
+
+    <!-- Auto-Heal -->
+    <div id="auto-heal">
+        <h2>Auto-Heal</h2>
+        <p>Automatically repair failing test scripts by updating broken locators and fixing execution issues.</p>
+        
+        <h3>How Auto-Heal Works:</h3>
+        <ol>
+            <li>Navigate to Auto-Heal in the sidebar</li>
+            <li>Select a Module to analyze</li>
+            <li>Click Search to find scenarios that need healing</li>
+            <li>Review the results showing:
+                <ul>
+                    <li>Feature and scenario information</li>
+                    <li>Current vs. updated scripts</li>
+                    <li>Locator map changes</li>
+                </ul>
+            </li>
+            <li>For each scenario:
+                <ul>
+                    <li>Click AUTO HEAL to trigger the healing process</li>
+                    <li>Review the updated script</li>
+                    <li>Click Accept to apply changes or Reject to discard</li>
+                </ul>
+            </li>
+        </ol>
+        
+        <div class="success-box">
+            <strong>Current Accuracy:</strong> 95% success rate with comprehensive error handling
+        </div>
+    </div>
+
+    <!-- API Integration -->
+    <div id="api-integration">
+        <h2>API Integration & JSON Files</h2>
+        <p>Use API calls to set up test data and perform backend operations within your automation tests.</p>
+        
+        <h3>JSON File Format:</h3>
+        <p>Create a JSON file containing URL, method, headers, and body for API calls:</p>
+        
+        <pre class="code-block">{
+  "url": "https://stg-use2-apt-shared-main.plat.stg.aws.chewy.cloud/eks/app/account-orchestrator/v1/test/accounts",
+  "method": "POST",
+  "headers": {
+    "accept": "application/vnd.api+json",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "accountType": "REGISTERED",
+    "password": "YOURPASSWORD",
+    "u2sClientId": "storefront-dummy-id",
+    "enabled": true,
+    "email": "playwright.test+{timestamp}@example.com",
+    "firstName": "Playwright",
+    "lastName": "Test"
+  }
+}</pre>
+        
+        <h3>Using API Responses in Feature Files:</h3>
+        <p>Reference API responses in your feature file steps:</p>
+        <pre class="code-block">And user add Header "Authorization: Bearer {NewUserAuthToken}" in session service
+And user add "loginId: {accountResponse.loginId}" to session body</pre>
+        
+        
+        <div class="info-box">
+            <strong>Note:</strong> To execute TS files with API steps, <code>api.service.ts</code> is needed to handle JSON invocation, header/body modification, and API response storage.
+        </div>
+    </div>
+
+    <!-- Cookie Extraction -->
+    <div id="cookie-extraction">
+        <h2>Cookie Extraction</h2>
+        <p>Extract and manage cookies from browser sessions for use in subsequent test steps and API calls.</p>
+        
+        <h3>How Cookie Extraction Works:</h3>
+        <ol>
+            <li>Use the cookie extraction step after completing a login or authentication flow</li>
+            <li>Cookies are automatically captured from the current browser session</li>
+            <li>Store cookies with a descriptive name for later reference</li>
+            <li>Reference stored cookies in subsequent steps or API requests</li>
+        </ol>
+        
+        <h3>Cookie Extraction in Feature Files:</h3>
+        <p>Extract cookies after login and use them in subsequent steps:</p>
+        <pre class="code-block">Then user extracts cookies as "login_cookie"
+Then user add Header "Authorization: Bearer {login_cookie.JWT}" in account service
+Then user enters "Search" as {login_cookie.rxVisitor}</pre>
+        
+        <h3>Cookie Structure:</h3>
+        <p>Extracted cookies are stored as key-value pairs with the following properties:</p>
+        <ul>
+            <li><strong>name</strong> - Cookie identifier</li>
+            <li><strong>value</strong> - Cookie value</li>
+            <li><strong>domain</strong> - Domain the cookie applies to</li>
+            <li><strong>path</strong> - Path the cookie applies to</li>
+            <li><strong>expires</strong> - Expiration timestamp (if applicable)</li>
+        </ul>
+        
+        <h3>Using Extracted Cookies:</h3>
+        <pre class="code-block">// After extracting cookies as "session_cookies"
+// Reference specific cookie values in feature steps:
+Then user enters "Email" as {session_cookies.email}
+Then user clicks on {session_cookies.buttonName}
+Then user add Header "Authorization: Bearer {session_cookies.authToken}" in service</pre>
+        
+        <div class="info-box">
+            <strong>Note:</strong> Cookie data is automatically converted to key-value pairs for easy reference in subsequent steps. Use dot notation to access specific cookie properties (e.g., {login_cookie.JWT}).
+        </div>
+    </div>
+
+    <!-- Mock API -->
+    <div id="mock-api">
+        <h2>Mock API Integration</h2>
+        <p>Use Mock API to intercept and simulate HTTP responses during testing. This is useful for testing scenarios without making real API calls.</p>
+        
+        <h3>How Mock API Works:</h3>
+        <ol>
+            <li>Create a JSON mock file with the response structure you want to simulate</li>
+            <li>In your feature file, use the MOCKS step before the action that will trigger the API call</li>
+            <li>The mock response will be returned instead of the actual API call</li>
+            <li>Continue with your test steps using the mocked response</li>
+        </ol>
+        
+        <h3>Mock JSON File Format:</h3>
+        <p>Create a JSON file containing the mock response structure:</p>
+        <pre class="code-block">{
+  "status": 200,
+  "route": "**/api/checkout/v3/shipping-address",
+  "method": "POST",
+  "response": {
+    "order": {
+      "id": 5011021576,
+      "status": "P",
+      "currency": "USD",
+      "totalItemQuantity": 1,
+      "shippingAddress": {
+        "firstName": "Playwright",
+        "lastName": "Test",
+        "street1": "123 Main St",
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02101"
+      },
+      "shippingMethod": {
+        "id": "standard",
+        "name": "Standard Shipping",
+        "cost": 5.99
+      }
+    }
+  }
+}</pre>
+
+        <h3>Using Mock API in Feature Files:</h3>
+        <p>Use the MOCKS step to activate the mock before the action:</p>
+        <pre class="code-block">Then user MOCKS with "mock_post_shiptothisaddress.json"
+Then user clicks "Ship to this address" button
+Then the user verifies that shipping address is saved
+Then the user verifies that "Standard Shipping" option is displayed</pre>
+
+        <h3>Mock JSON Structure:</h3>
+        <ul>
+            <li><strong>status</strong> - HTTP status code (200, 201, 400, 500, etc.)</li>
+            <li><strong>route</strong> - URL pattern to match (supports wildcards like ** or *)</li>
+            <li><strong>method</strong> - HTTP method (GET, POST, PUT, DELETE, PATCH)</li>
+            <li><strong>response</strong> - JSON response body that will be returned by the mock</li>
+        </ul>
+
+        <h3>Mock Files Location:</h3>
+        <p>Place mock JSON files in your project's mock data directory (typically alongside your feature files or in a dedicated mocks folder).</p>
+        
+        <div class="success-box">
+            <strong>Pro Tip:</strong> Use wildcards in routes to match multiple similar endpoints:
+            <ul style="margin-top: 10px;">
+                <li><code>**/api/checkout/**</code> - Matches any checkout endpoint</li>
+                <li><code>**/api/order/*</code> - Matches specific order operations</li>
+                <li><code>**</code> - Matches any endpoint (use with caution)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Local Testing -->
+    <div id="local-testing">
+        <h2>Running Tests Locally</h2>
+        
+        <h3>Prerequisites:</h3>
+        <p>Set a custom user-agent to bypass bot detection and security blocks:</p>
+        <pre class="code-block">const contextOptions: any = {
+  viewport: { width: 1920, height: 1080 },
+  userAgent: 'MyLoadTestingAgentString/1.0/...'
+};</pre>
+        
+        <h3>File Organization:</h3>
+        <ol>
+            <li>Feature files go to: <code>src/tests/features</code></li>
+            <li>Step definition files go to: <code>src/tests/steps</code></li>
+            <li>Feature and step definition files must have the same name
+                <ul>
+                    <li>Example: <code>Pay10066.feature</code> &amp; <code>Pay10066.ts</code></li>
+                </ul>
+            </li>
+        </ol>
+        
+        <h3>Tagging Conventions:</h3>
+        <pre class="code-block">@bnpl @Pay10066                 // All tests in directory + specific file
+@bnpl - triggers all tests in a directory
+@Pay10066 - triggers all scenarios in a feature file
+@bnpl-10066 - triggers a specific scenario</pre>
+        
+        <h3>Running Tests Locally:</h3>
+        <pre class="code-block">npx cucumber-js --tags "{@bnpl-10066}"</pre>
+    </div>
+
+    <!-- CI/CD Pipeline -->
+    <div id="cicd">
+        <h2>Running Tests from CI/CD Pipeline</h2>
+        <p>Execute tests from Jenkins pipeline once feature and step definition files are merged.</p>
+        
+        <h3>Jenkins Execution Steps:</h3>
+        <ol>
+            <li>Navigate to: <code>https://jenkins-nonprod.shss.chewy.com/job/test-genie_execution/</code></li>
+            <li>Click "Build with Parameters"</li>
+            <li>Add the tag from your feature file to TestTags section</li>
+            <li>Select "develop" branch</li>
+            <li>Start the build</li>
+        </ol>
+        
+        <div class="info-box">
+            <strong>Note:</strong> Test environment is always STG regardless of selection. Contact TestGenie team for pipeline questions.
+        </div>
+    </div>
+
+    <!-- Reviewing Generated Scripts -->
+    <div id="reviewing">
+        <h2>Reviewing Generated Step Definitions</h2>
+        <p>The generated step definition files have ~95% accuracy. Review them line by line:</p>
+        
+        <h3>Review Checklist:</h3>
+        <ul>
+            <li>Verify all locators are correct and match the application UI</li>
+            <li>Check that all steps are in the correct order</li>
+            <li>Ensure data values match your test scenarios</li>
+            <li>Validate API calls and parameters</li>
+            <li>Test with different scenarios to ensure robustness</li>
+        </ul>
+    </div>
+
+    <!-- Onboarding Process -->
+    <div id="onboarding">
+        <h2>Team Onboarding Process</h2>
+        <p>To onboard your project to TestGenie, provide the following information to the team:</p>
+        
+        <h3>Required Information:</h3>
+        <ol>
+            <li><strong>Domain or Team Name</strong>
+                <ul>
+                    <li>Example: "Payments" for Payments team, "Autoship" for Autoship team</li>
+                </ul>
+            </li>
+            <li><strong>GitHub Repository URL</strong>
+                <ul>
+                    <li>Must follow recommended structure (see payments-ui-test-suite sample)</li>
+                    <li>Required only if integrating with TestGenie</li>
+                </ul>
+            </li>
+            <li><strong>Jenkins Pipeline URL</strong>
+                <ul>
+                    <li>Example: <code>https://jenkins-nonprod.shss.chewy.com/job/test-genie_execution/</code></li>
+                    <li>Required only if integrating with TestGenie</li>
+                </ul>
+            </li>
+        </ol>
+        
+        <h3>Integration Notes:</h3>
+        <ul>
+            <li>Items 2 &amp; 3 enable automated PR creation and test execution</li>
+            <li>Without integration, you can still generate scripts but must manually merge and trigger tests</li>
+        </ul>
+        
+        <h3>Repository Structure:</h3>
+        <p>Follow the recommended structure from sample repository: <a href="https://github.com/Chewy-Inc/payments-ui-test-suite" target="_blank">payments-ui-test-suite</a></p>
+    </div>
+
+    <!-- AWS & Security -->
+    <div id="security">
+        <h2>Security & Credentials</h2>
+        
+        <h3>Secure Credentials with AWS Secrets Manager</h3>
+        
+        <div class="info-box">
+            <strong>What it is:</strong> A secure vault where we keep sensitive items (API tokens, passwords, keys).
+        </div>
+        
+        <h3>Why It Matters:</h3>
+        <ul>
+            <li>Nothing sensitive is hardcoded or shared in plain text</li>
+            <li>The app fetches what it needs only when it needs it</li>
+            <li>Credentials are encrypted and securely stored in AWS</li>
+        </ul>
+        
+        <h3>How It Works (At a Glance):</h3>
+        <ol>
+            <li>Your team's tokens/credentials are stored once in a secure AWS vault</li>
+            <li>When the app needs one (for example, to call an API), it securely retrieves it from the vault</li>
+            <li>The secret never shows up in the UI, logs, or code</li>
+        </ol>
+        
+        <h3>Using AWS Secrets in Feature Files:</h3>
+        <p>Reference AWS Secrets Manager credentials using the <code>{awssecretmanager.secret_name}</code> placeholder format:</p>
+        <pre class="code-block">@Deals @Deals001
+Feature: Adding Details
+@Deals-001
+  Scenario: Test new Playwright
+  Given user navigates to "https://rebates-platform-ui.demm.stg.aws.chewy.cloud/deals"
+  And user enters "Username" as {awssecretmanager.galileo_username} on Login page
+  And user clicks on the "Next" button
+  And user enters "Password" as {awssecretmanager.galileo_password} on Login page
+  And user clicks on the "Verify" button
+  Then the user verifies that "Deal List" text is displayed</pre>
+        
+        <h3>What You Need to Do:</h3>
+        <div class="success-box">
+            <strong>Normally, nothing.</strong> The app takes care of secret retrieval automatically.
+        </div>
+        
+        <h3>AWS Account Access (Optional):</h3>
+        <p>For log access and monitoring, you may need PowerUserAccess to the following AWS accounts:</p>
+        <ul>
+            <li><code>corp_ai_workloads_stg</code> - Staging environment</li>
+        </ul>
+        
+        <div class="warning-box">
+            <strong>Security Best Practice:</strong> Never hardcode credentials in your feature files or code. Always use the {awssecretmanager.secret_name} placeholder to reference stored credentials.
+        </div>
+    </div>
+
+    <!-- Troubleshooting -->
+    <div id="troubleshooting">
+        <h2>Troubleshooting & FAQ</h2>
+        
+        <h3>Q: Why is my test taking longer than expected?</h3>
+        <p><strong>A:</strong> Test generation typically takes 10-20 minutes depending on feature file complexity. Intelligent caching can reduce processing time by up to 40%.</p>
+        
+        <h3>Q: How accurate are the generated scripts?</h3>
+        <p><strong>A:</strong> Current accuracy is ~95%. Always review generated scripts line by line to verify locators and steps.</p>
+        
+        <h3>Q: Can I run tests locally before merging to repository?</h3>
+        <p><strong>A:</strong> Yes! Use the local testing commands with Cucumber-js. Ensure feature and step definition files are in the correct directories with matching names.</p>
+        
+        <h3>Q: What if a test fails?</h3>
+        <p><strong>A:</strong> Use the Auto-Heal feature to analyze and repair failing tests. Review the video recording and screenshots for detailed failure context.</p>
+        
+        <h3>Q: How do I handle API authentication in tests?</h3>
+        <p><strong>A:</strong> Use AWS Secrets Manager for credentials. Reference them in your feature files or extract cookies post-login using the cookie extraction feature.</p>
+        
+        <h3>Q: Can I use TestGenie for non-Chewy.net applications?</h3>
+        <p><strong>A:</strong> Yes! TestGenie can generate automation scripts from any web application, though current samples cover chewy.net and Rhapsody.</p>
+        
+        <h3>Q: How do I download test videos?</h3>
+        <p><strong>A:</strong> After execution, look for download links in run output, pipeline logs, or Slack notifications. Videos are stored in AWS S3.</p>
+        
+        <h3>Q: Who do I contact for help?</h3>
+        <ul>
+            <li><strong>Secret additions/rotations:</strong> Platform/DevOps team</li>
+            <li><strong>Video access issues:</strong> QA/Automation team</li>
+            <li><strong>TestGenie features:</strong> TestGenie team</li>
+        </ul>
+        
+        <div class="success-box">
+            <strong>Key Achievements:</strong>
+            <ul style="margin-top: 10px;">
+                <li>3-12 minute total processing time for most scenarios</li>
+                <li>95%+ success rate with comprehensive error handling</li>
+                <li>40% reduction in processing time via intelligent caching</li>
+                <li>Full video and screenshot evidence capture</li>
+                <li>Automated TypeScript code generation with best practices</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Need Help -->
+    <div id="contact">
+        <h2>Need Help?</h2>
+        <p>For additional support and questions:</p>
+        <ul>
+            <li>Contact your team's TestGenie administrator</li>
+            <li>Refer to the official GitHub repository for code examples</li>
+            <li>Check Slack notifications for execution updates and status</li>
+            <li>Review video recordings and screenshots for detailed test execution context</li>
+        </ul>
+    </div>
+</body>
+</html>

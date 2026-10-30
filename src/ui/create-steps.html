@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/TestGenie/static/create-steps.css">
+</head>
+<body>
+    <div class="content">
+        <h2>Convert Steps to Feature Files</h2>
+            
+            <div class="form-row">
+                <div class="form-label">Project Domain</div>
+                <select class="select-input" id="selectDomain" required>
+                    <option value="" selected disabled>-- Select Domain --</option>
+                    <!-- Options will be populated dynamically from API -->
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-label">Automation Script Type</div>
+                <select class="select-input" id="automationScriptType" required>
+                    <option value="" selected disabled>-- Select Type --</option>
+                    <option value="Playwright">Playwright</option>
+                    <option value="BDD Cucumber">BDD Cucumber</option>
+                </select>
+            </div>
+
+            <div id="conditionalFields" style="display: none;">
+                <hr class="separator-line">
+                <div class="form-row form-row-workflow-and-common">
+                    <div class="workflow-name-block">
+                        <div class="form-row">
+                            <div class="form-label">Workflow Name:</div>
+                            <div class="workflow-input-wrap">
+                                <input type="text" class="text-input" id="workflowName" placeholder="">
+                                <span id="workflowNameError" class="workflow-name-error"></span>
+                            </div>
+                        </div>
+                        <div id="bddCucumberFields">
+                            <div class="form-row">
+                                <div class="form-label">Feature name</div>
+                                <div class="workflow-input-wrap bdd-field-wrap">
+                                    <input type="text" class="text-input" id="featureName" placeholder="">
+                                    <span id="featureNameError" class="workflow-name-error"></span>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-label">Feature tag</div>
+                                <div class="workflow-input-wrap bdd-field-wrap">
+                                    <input type="text" class="text-input" id="featureTag" placeholder="">
+                                    <span id="featureTagError" class="workflow-name-error"></span>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-label">Scenario name</div>
+                                <div class="workflow-input-wrap bdd-field-wrap">
+                                    <input type="text" class="text-input" id="scenarioName" placeholder="">
+                                    <span id="scenarioNameError" class="workflow-name-error"></span>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-label">Scenario tag</div>
+                                <div class="workflow-input-wrap bdd-field-wrap">
+                                    <input type="text" class="text-input" id="scenarioTag" placeholder="">
+                                    <span id="scenarioTagError" class="workflow-name-error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-label">Create Workflow:</div>
+                            <div class="workflow-textarea-wrap">
+                                <textarea class="textarea-input" id="createWorkflow" placeholder=""></textarea>
+                                <span id="createWorkflowError" class="workflow-name-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-row workflow-actions-row">
+                            <div class="form-label form-label-spacer" aria-hidden="true"></div>
+                            <div class="workflow-actions">
+                                <button type="button" class="cs-btn" id="showStepsPreviewBtn">Show Steps Preview</button>
+                                <button type="button" class="cs-btn" id="saveWorkflowBtn" disabled>Save</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="common-steps-block">
+                        <div class="common-steps-header"><strong>Common steps that can be re-used.</strong> <em>Please drag the steps to the text area.</em></div>
+                        <div id="commonStepsBox" class="common-steps-box">
+                            <div id="commonStepsList" class="common-steps-list"></div>
+                        </div>
+                        <p class="reuse-workflow-msg">Please <a href="#" id="reuseWorkflowStepsLink">click here</a> to re-use the successful workflow steps for selected module.</p>
+                    </div>
+                </div>
+            </div>
+
+        <div class="footer-line"></div>
+    </div>
+    <script src="/TestGenie/static/migration_storage.js"></script>
+    <script src="/TestGenie/static/textarea_autocomplete.js"></script>
+    <script src="/TestGenie/static/create-steps.js"></script>
+</body>
+</html>
