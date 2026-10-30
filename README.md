@@ -1,4 +1,4 @@
-# Chewy GenAI Automation
+#GenAI Automation
 
 This project contains two separate services:
 1. Main GenAI Automation API - Generates BDD feature files
